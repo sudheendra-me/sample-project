@@ -1,3 +1,41 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json"
+  "compilerOptions": {
+    "target": "es2020", // Modern target for async/await, dynamic import
+    "module": "esnext", // Required for React.lazy() + dynamic import
+    "moduleResolution": "node", // Keeps compatibility with Metro
+    "jsx": "react-native", // Tells the compiler to parse JSX in a way that suits React Native.
+    "strict": true, // Enable all strict type-checking
+    "noEmit": true, // Prevents JS output
+    "isolatedModules": true, // Required for Babel
+    "esModuleInterop": true, //Enables clean imports like import React from 'react'
+    "allowSyntheticDefaultImports": true, //ensures compatibility with Babel behavior.
+    "allowJs": true, //Allows mixing JavaScript files with TypeScript files in the project.
+    "checkJs": false, //Disables type checking on JavaScript files (only checks .ts and .tsx).
+    "resolveJsonModule": true, //Lets you import .json files using import data from './data.json'
+    "skipLibCheck": true, //Skips type-checking of files in node_modules
+
+    "noUnusedLocals": true, //Warns/error when a local variable is declared but never used
+    "noUnusedParameters": true, //Warns/error when a function parameter is declared but never used
+
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@auth/*": ["src/screens/auth/*"],
+      "@app/*": ["src/screens/app/*"],
+      "@service/*": ["src/api/service/*"],
+      "@store/*": ["src/store/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@theme/*": ["src/theme/*"],
+      "@constants/*": ["src/constants/*"],
+      "@utils/*": ["src/utils/*"],
+      "@images/*": ["src/assets/images/*"]
+    }, //Creates custom import aliases so you can import modules cleanly
+
+    "types": ["react", "jest"], // Include React and Jest typings, Ensures proper type-checking during development and testing
+    "lib": ["esnext", "dom"] //Includes standard TypeScript library features
+  },
+  "include": ["src", "App.tsx"],
+
+
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js"] //not meant to be type checked
 }
